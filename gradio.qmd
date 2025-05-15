@@ -1,0 +1,187 @@
+---
+title: "Introducción a Gradio"
+author: "MARCO AGUIRRE <br>EPN<br>29-04-2025"
+format: 
+  revealjs:
+    logo: logo.png
+    theme: [moon]
+    preview-links: auto
+    chalkboard: 
+      boardmarker-width: 5
+    slide-number: true
+    progress: true
+    scrollable: true
+from: markdown+emoji
+execute:
+  echo: true
+---
+
+# Indice
+
+- ¿Qué es Gradio?.
+- ¿Para qué sirve Gradio?.
+- ¿Por qué usar Gradio?.
+- Historia de Gradio.
+- Conceptos básicos y terminología
+- Componentes en Gradio
+- Componentes de Salida
+- Desplegar Aplicaciones Gradio
+- Conclusiones
+
+# ¿Qué es Gradio?
+
+- Librería Python para crear interfaces web interactivas.
+- Mostrar modelos de Machine Learning en minutos.
+- Usado para prototipos y demos IA.
+
+
+# ¿Para qué sirve Gradio?
+
+- Testing rápido de funciones.
+- Compartir modelos de IA.
+- Interfaces accesibles.
+- Toy Examples.
+
+
+
+# ¿Por qué usar Gradio?
+
+- No requiere frontend.
+- Exporta apps fácilmente.
+- Integrado con Hugging Face.
+
+
+
+# Historia de Gradio
+
+- Fundado en 2019 por Abubakar Abid y Ali Abid.
+- Adquirido por Hugging Face en 2021.
+- Hoy es parte del ecosistema IA.
+
+
+
+# Instalación de Gradio
+Requisito : Gradio requiere Python 3.10 o superior
+```bash
+$ pip install gradio ipykernel
+```
+
+# Primeros pasos
+
+- Importar Gradio.
+- Crear función Python.
+- Lanzar interfaz.
+
+
+# Conceptos básicos y terminología
+
+```{python}
+#| echo: true
+import gradio as gr
+def greet(nombre, intensidad):
+    return "HOLA SOY GRADIO Buenos dias, " + nombre + "-EPN-" * int(intensidad)
+demo = gr.Interface(
+    fn=greet,inputs=["text", "slider"],
+    outputs=["text"],)
+demo.launch()
+```
+
+# Conceptos básicos y terminología
+
+- **Interfaz**: Clase principal para crear interfaces de usuario.
+- **Componentes**: Elementos de entrada y salida como cuadros de texto, imágenes y audio.
+- **Funciones**: Funciones de Python que procesan información de entrada y devuelven resultados para mostrar en los componentes de salida.
+- **Lanzamiento**: Método para iniciar la aplicación Gradio.
+
+
+# Componentes en Gradio
+
+- Gradio ofrece **componentes de entrada** y **componentes de salida**.
+- Los **componentes de entrada** permiten al usuario enviar datos a una función de Python.
+- Ejemplos comunes de entrada:
+  - **Textbox**
+  - **Imagen**
+  - **Audio**
+  - **Deslizador**
+  - **Desplegable**
+
+# Componentes de Entrada
+
+```{python}
+#| echo: false
+def process_inputs(text, image, audio, number, option):
+   # Process inputs and return results
+   return f"Processed: {text}, {number}, {option}"
+demo = gr.Interface(
+   fn=process_inputs,
+   inputs=[
+       gr.Textbox(label="Enter text"),
+       gr.Image(label="Upload image"),
+       gr.Audio(label="Upload audio"),  # Uncomment this line to add audio input
+       gr.Slider(0, 100, label="Choose a number"),
+       gr.Dropdown(["Streamlit", "Taipy", "Gradio"], label="Select a UI library"),
+   ],
+   outputs="text",
+)
+demo.launch()
+```
+
+# Componentes de Entrada
+
+```python
+def process_inputs(text, image, audio, number, option):
+   # Process inputs and return results
+   return f"Processed: {text}, {number}, {option}"
+demo = gr.Interface(
+   fn=process_inputs,
+   inputs=[
+       gr.Textbox(label="Enter text"),
+       gr.Image(label="Upload image"),
+       gr.Audio(label="Upload audio"),  # Uncomment this line to add audio input
+       gr.Slider(0, 100, label="Choose a number"),
+       gr.Dropdown(["Streamlit", "Taipy", "Gradio"], label="Select a UI library"),
+   ],
+   outputs="text",
+)
+demo.launch()
+```
+
+# Componentes de Salida
+
+- Etiqueta: Para mostrar resultados de texto o clasificación
+- Imagen: Para mostrar imágenes procesadas o generadas
+- Audio: Para reproducir audio procesado o generado
+- Parcela: Para visualizar gráficos o diagrama
+
+# Desplegar Aplicaciones Gradio
+
+- **Hugging Face Spaces**:
+  - Crear cuenta en huggingface.co.
+  - Generar y guardar un **token de acceso**.
+  - Navegar al directorio y ejecutar `gradio deploy`.
+
+# Buenas Prácticas y Consejos en Gradio
+
+- **Organización**: Usa scripts separados y empaquetar.
+- **Diseño**: `gr.Column()` y `gr.Row()` para un GUI equilibrado.
+- **Información**: Usa `info` y `label` en los componentes.
+- **Variables de entorno**: Usa `python-dotenv` localmente y configura en Hugging Face Spaces.
+- **Rendimiento**: Implementa almacenamiento en caché y `gr.LoadingStatus()` para tareas largas.
+- **Modelos grandes**: Aloja en HuggingFace Hub para mejor rendimiento.
+
+
+# Conclusiones
+
+- Gradio facilita creación de apps IA.
+- Ideal para prototipos y demostraciones.
+- Totalmente compatible con Hugging Face.
+
+# ¿Dónde aprender más?
+
+- [https://gradio.app/docs](https://gradio.app/docs)
+- [https://github.com/gradio-app/gradio](https://github.com/gradio-app/gradio)
+- Tutoriales en YouTube y Medium.
+
+
+
+# 🦉 ¡Gracias! 🚀
